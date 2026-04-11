@@ -113,12 +113,17 @@ def send_guest_list(message):
                 
                 for guest in batch:
                     status = "✅" if guest['attending'] == 'yes' else "❌"
-                    drinks = guest.get('drinks_preference', 'Не указано')
-                    if not drinks:
-                        drinks = 'Не указано'
                     
                     list_text += f"{status} <b>{guest['name']}</b>\n"
-                    list_text += f"   🍷 Напитки: {drinks}\n\n"
+                    
+                    # Показываем напитки только для тех, кто подтвердил участие
+                    if guest['attending'] == 'yes':
+                        drinks = guest.get('drinks_preference', 'Не указано')
+                        if not drinks:
+                            drinks = 'Не указано'
+                        list_text += f"   🍷 Напитки: {drinks}\n"
+                    
+                    list_text += "\n"
                 
                 bot.send_message(message.chat.id, list_text, parse_mode='HTML')
         else:
