@@ -1,13 +1,45 @@
 import logging
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_ADMIN_CHAT_ID
 from database import async_session_maker
 from crud import get_all_guests, get_stats
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def get_main_keyboard() -> ReplyKeyboardMarkup:
+    """Создает основную клавиатуру с кнопками"""
+    keyboard = [
+        [KeyboardButton(text="📋 Список гостей"), KeyboardButton(text="📊 Статистика")],
+        [KeyboardButton(text="📖 Помощь")]
+    ]
+    return ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+        one_time_keyboard=False,
+        input_field_placeholder="Выберите действие..."
+    )
+
+
+def get_guest_actions_keyboard(guest_id: int) -> InlineKeyboardMarkup:
+    """Создает inline-клавиатуру для действий с гостем"""
+    keyboard = [
+        [InlineKeyboardButton(text="✅ Подтвердить", callback_data=f"guest_confirm_{guest_id}")],
+        [InlineKeyboardButton(text="❌ Отменить", callback_data=f"guest_cancel_{guest_id}")]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
+
+def get_confirmation_keyboard() -> InlineKeyboardMarkup:
+    """Создает клавиатуру подтверждения для нового гостя"""
+    keyboard = [
+        [InlineKeyboardButton(text="✅ Приду", callback_data="will_attend_yes")],
+        [InlineKeyboardButton(text="❌ Не приду", callback_data="will_attend_no")]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 # Инициализируем бота только если токен предоставлен
 bot = None
@@ -29,7 +61,8 @@ if TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID:
             "Доступные команды:\n"
             "/guests - список всех гостей\n"
             "/stats - статистика по гостям\n"
-            "/help - помощь"
+            "/help - помощь",
+            reply_markup=get_main_keyboard()
         )
 
     @dp.message(Command("guests"))
@@ -43,7 +76,7 @@ if TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID:
             guests = await get_all_guests(session)
         
         if not guests:
-            await message.answer("📭 Пока нет ни одного гостя в списке.")
+            await message.answer("📭 Пока нет ни одного гостя в списке.", reply_markup=get_main_keyboard())
             return
         
         text = "📋 <b>Список гостей:</b>\n\n"
@@ -53,7 +86,7 @@ if TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID:
             text += f"{i}. {status} <b>{guest.name}</b>{drinks}\n"
         
         for chunk in [text[i:i+4000] for i in range(0, len(text), 4000)]:
-            await message.answer(chunk, parse_mode="HTML")
+            await message.answer(chunk, parse_mode="HTML", reply_markup=get_main_keyboard())
 
     @dp.message(Command("stats"))
     async def cmd_stats(message: Message):
@@ -72,7 +105,7 @@ if TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID:
             f"❌ Не придут: {stats['not_attending']}"
         )
         
-        await message.answer(text, parse_mode="HTML")
+        await message.answer(text, parse_mode="HTML", reply_markup=get_main_keyboard())
 
     @dp.message(Command("help"))
     async def cmd_help(message: Message):
@@ -87,8 +120,24 @@ if TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID:
             "• Уведомлять о новых ответах гостей\n"
             "• Показывать полный список гостей (/guests)\n"
             "• Показывать статистику (/stats)\n\n"
-            "Все данные хранятся в базе данных и доступны через этот бот."
+            "Все данные хранятся в базе данных и доступны через этот бот.",
+            reply_markup=get_main_keyboard()
         )
+    
+    @dp.message(lambda message: message.text == "📋 Список гостей")
+    async def handle_guests_button(message: Message):
+        """Обработчик кнопки списка гостей"""
+        await cmd_guests(message)
+    
+    @dp.message(lambda message: message.text == "📊 Статистика")
+    async def handle_stats_button(message: Message):
+        """Обработчик кнопки статистики"""
+        await cmd_stats(message)
+    
+    @dp.message(lambda message: message.text == "📖 Помощь")
+    async def handle_help_button(message: Message):
+        """Обработчик кнопки помощи"""
+        await cmd_help(message)
 else:
     logger.warning("Telegram bot not configured - set TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID in .env")
 
