@@ -23,7 +23,7 @@ def send_welcome(message):
 
 С любовью, Антон и Вероника 💚
     """
-    bot.send_message(message.chat_id, welcome_text, parse_mode='HTML')
+    bot.send_message(message.chat.id, welcome_text, parse_mode='HTML')
 
 # Команда /help
 @bot.message_handler(commands=['help'])
@@ -43,7 +43,7 @@ def send_help(message):
 
 /start - Главное меню
     """
-    bot.send_message(message.chat_id, help_text, parse_mode='HTML')
+    bot.send_message(message.chat.id, help_text, parse_mode='HTML')
 
 # Команда /stats
 @bot.message_handler(commands=['stats'])
@@ -64,11 +64,11 @@ def send_stats(message):
 ✅ Подтвердили: {data['attending_yes']}
 ❌ Не смогут: {data['attending_no']}
             """
-            bot.send_message(message.chat_id, stats_text, parse_mode='HTML')
+            bot.send_message(message.chat.id, stats_text, parse_mode='HTML')
         else:
-            bot.send_message(message.chat_id, 'Ошибка получения статистики')
+            bot.send_message(message.chat.id, 'Ошибка получения статистики')
     except Exception as e:
-        bot.send_message(message.chat_id, f'Ошибка: {str(e)}')
+        bot.send_message(message.chat.id, f'Ошибка: {str(e)}')
 
 # Команда /list
 @bot.message_handler(commands=['list'])
@@ -84,7 +84,7 @@ def send_guest_list(message):
             guests = response.json()
             
             if not guests:
-                bot.send_message(message.chat_id, 'Пока нет ответов от гостей')
+                bot.send_message(message.chat.id, 'Пока нет ответов от гостей')
                 return
             
             # Разбиваем на сообщения по 10 гостей (ограничение Telegram)
@@ -102,17 +102,17 @@ def send_guest_list(message):
                     list_text += f"{status} <b>{guest['name']}</b>\n"
                     list_text += f"   🍷 Напитки: {drinks}\n\n"
                 
-                bot.send_message(message.chat_id, list_text, parse_mode='HTML')
+                bot.send_message(message.chat.id, list_text, parse_mode='HTML')
         else:
-            bot.send_message(message.chat_id, 'Ошибка получения списка гостей')
+            bot.send_message(message.chat.id, 'Ошибка получения списка гостей')
     except Exception as e:
-        bot.send_message(message.chat_id, f'Ошибка: {str(e)}')
+        bot.send_message(message.chat.id, f'Ошибка: {str(e)}')
 
 # Обработка текстовых сообщений
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.send_message(
-        message.chat_id, 
+        message.chat.id, 
         'Используйте команды:\n/stats - статистика\n/list - список гостей\n/help - помощь',
         parse_mode='HTML'
     )
