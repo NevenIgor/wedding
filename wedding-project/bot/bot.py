@@ -160,8 +160,10 @@ def calculate_alcohol(message):
             for guest in attending_guests:
                 drinks = guest.get('drinks_preference', '')
                 if drinks:
-                    # Разбиваем на отдельные напитки (может быть перечисление через запятую)
-                    drink_items = [d.strip() for d in drinks.split(',')]
+                    # Заменяем союзы "и" и запятые на пробелы для корректного разделения
+                    normalized_drinks = drinks.replace(',', ' ').replace(' и ', ' ')
+                    # Разбиваем по пробелам на отдельные напитки
+                    drink_items = [d.strip() for d in normalized_drinks.split()]
                     for drink in drink_items:
                         if drink:
                             # Нормализуем название (первая буква заглавная)
