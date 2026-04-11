@@ -48,11 +48,6 @@ htmlcov/
 .coverage.*
 .cache
 
-# Docker
-.dockerenv
-Dockerfile*
-docker-compose*
-
 # OS
 .DS_Store
 Thumbs.db
