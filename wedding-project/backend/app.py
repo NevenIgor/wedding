@@ -11,7 +11,7 @@ CORS(app)
 # Конфигурация
 DB_PATH = os.environ.get('DB_PATH', '/data/wedding.db')
 TG_BOT_TOKEN = os.environ.get('TG_BOT_TOKEN', '')
-TG_CHAT_ID = os.environ.get('TG_CHAT_ID', '')
+TG_USER_IDS = os.environ.get('TG_USER_IDS', '').split(',') if os.environ.get('TG_USER_IDS') else []
 
 def init_db():
     """Инициализация базы данных"""
@@ -38,8 +38,8 @@ def get_db_connection():
     return conn
 
 def send_telegram_notification(guest_data):
-    """Отправка уведомления в Telegram"""
-    if not TG_BOT_TOKEN or not TG_CHAT_ID:
+    """Отправка уведомления в Telegram всем пользователям из списка"""
+    if not TG_BOT_TOKEN or not TG_USER_IDS:
         print("Telegram не настроен")
         return
     
@@ -53,18 +53,27 @@ def send_telegram_notification(guest_data):
     """
     
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"
-    data = {
-        'chat_id': TG_CHAT_ID,
-        'text': message,
-        'parse_mode': 'HTML'
-    }
     
-    try:
-        response = requests.post(url, json=data, timeout=10)
-        if response.status_code != 200:
-            print(f"Ошибка отправки в Telegram: {response.text}")
-    except Exception as e:
-        print(f"Ошибка подключения к Telegram: {e}")
+    # Отправляем уведомление каждому пользователю из списка
+    for user_id in TG_USER_IDS:
+        user_id = user_id.strip()
+        if not user_id:
+            continue
+            
+        data = {
+            'chat_id': user_id,
+            'text': message,
+            'parse_mode': 'HTML'
+        }
+        
+        try:
+            response = requests.post(url, json=data, timeout=10)
+            if response.status_code != 200:
+                print(f"Ошибка отправки в Telegram для пользователя {user_id}: {response.text}")
+            else:
+                print(f"Уведомление отправлено пользователю {user_id}")
+        except Exception as e:
+            print(f"Ошибка подключения к Telegram для пользователя {user_id}: {e}")
 
 @app.route('/api/rsvp', methods=['POST'])
 def submit_rsvp():
