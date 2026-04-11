@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Свадьба Антона и Вероники | 05.09.2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         @font-face {
@@ -47,6 +48,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            -webkit-text-size-adjust: 100%;
         }
 
         .animated-bg {
@@ -176,7 +178,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
             position: relative;
         }
 
@@ -187,7 +189,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 16px;
             position: relative;
             overflow: hidden;
         }
@@ -199,59 +201,44 @@
         }
 
         .botanical-top-left {
-            top: 30px;
-            left: 30px;
-            width: 300px;
-            height: 240px;
+            top: 20px;
+            left: 16px;
+            width: 200px;
+            height: 160px;
             transform: rotate(-15deg);
-            opacity: 0.35;
-        }
-
-        .botanical-top-right {
-            top: 50px;
-            right: 30px;
-            width: 240px;
-            height: 200px;
-            transform: rotate(15deg) scaleX(-1);
             opacity: 0.3;
         }
 
-        .botanical-bottom-left {
-            bottom: 80px;
-            left: 20px;
-            width: 260px;
-            height: 210px;
-            transform: rotate(10deg);
+        .botanical-top-right {
+            top: 30px;
+            right: 16px;
+            width: 160px;
+            height: 130px;
+            transform: rotate(15deg) scaleX(-1);
             opacity: 0.25;
         }
 
-        .botanical-bottom-right {
+        .botanical-bottom-left {
             bottom: 60px;
-            right: 30px;
-            width: 280px;
-            height: 220px;
-            transform: rotate(-10deg) scaleX(-1);
-            opacity: 0.28;
+            left: 10px;
+            width: 180px;
+            height: 140px;
+            transform: rotate(10deg);
+            opacity: 0.2;
         }
 
-        .botanical-middle-right {
-            position: absolute;
-            right: 40px;
-            top: 45%;
-            transform: translateY(-50%) rotate(5deg);
-            width: 320px;
-            height: 250px;
+        .botanical-bottom-right {
+            bottom: 40px;
+            right: 20px;
+            width: 200px;
+            height: 150px;
+            transform: rotate(-10deg) scaleX(-1);
             opacity: 0.22;
         }
 
+        .botanical-middle-right,
         .botanical-middle-left {
-            position: absolute;
-            left: 20px;
-            top: 55%;
-            transform: translateY(-50%) rotate(-5deg);
-            width: 280px;
-            height: 220px;
-            opacity: 0.2;
+            display: none;
         }
 
         .leaf-svg {
@@ -259,7 +246,7 @@
             height: 100%;
             fill: none;
             stroke: var(--sage);
-            stroke-width: 1.2;
+            stroke-width: 1;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -267,127 +254,105 @@
         .hero-content-wrapper {
             position: relative;
             z-index: 2;
-            max-width: 700px;
-            padding: 50px 30px;
+            max-width: 100%;
+            padding: 30px 16px;
         }
 
         .names-title {
             font-family: 'Saint Amour Script', 'Pinyon Script', cursive;
-            font-size: clamp(5rem, 14vw, 10rem);
+            font-size: clamp(3.5rem, 12vw, 7rem);
             color: #3d2b1f;
-            margin-bottom: 35px;
-            line-height: 1.05;
+            margin-bottom: 25px;
+            line-height: 1.1;
             text-shadow:
                 0 2px 4px rgba(61, 43, 31, 0.3),
-                0 4px 15px rgba(61, 43, 31, 0.15),
-                0 0 40px rgba(201, 169, 97, 0.15);
+                0 4px 15px rgba(61, 43, 31, 0.15);
             font-weight: 400;
             letter-spacing: 0.02em;
             position: relative;
         }
 
         .names-title .and {
-            font-size: 0.45em;
+            font-size: 0.5em;
             display: inline-block;
-            margin: 0 15px;
+            margin: 0 10px;
             color: var(--gold);
-            text-shadow:
-                0 2px 8px rgba(201, 169, 97, 0.3),
-                0 0 20px rgba(201, 169, 97, 0.15);
         }
 
         .names-title::before,
         .names-title::after {
-            content: "✦";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gold);
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            opacity: 0.6;
-            animation: sparkle 3s ease-in-out infinite;
-        }
-
-        .names-title::before { left: -40px; }
-        .names-title::after { right: -40px; }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.4; transform: translateY(-50%) scale(1); }
-            50% { opacity: 0.9; transform: translateY(-50%) scale(1.2); }
+            display: none;
         }
 
         .invitation-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+            font-size: clamp(1rem, 4vw, 1.3rem);
             color: var(--text-dark);
-            margin-bottom: 45px;
-            line-height: 1.9;
+            margin-bottom: 35px;
+            line-height: 1.8;
             font-style: italic;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         .date-block {
-            margin: 45px 0;
-            padding: 35px 40px;
+            margin: 35px 0;
+            padding: 25px 20px;
             border-top: 1px solid var(--light-sage);
             border-bottom: 1px solid var(--light-sage);
-            position: relative;
         }
 
         .date-main {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
             color: var(--brown);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .time {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
             color: var(--olive-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .location-block {
-            margin-top: 45px;
+            margin-top: 35px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+            font-size: clamp(0.95rem, 3.5vw, 1.15rem);
             color: var(--text-dark);
-            line-height: 1.9;
-            padding: 25px 30px;
+            line-height: 1.8;
+            padding: 20px 16px;
             background: rgba(249, 247, 242, 0.7);
-            border-radius: 15px;
+            border-radius: 12px;
             border-left: 3px solid var(--sage);
             border-right: 3px solid var(--sage);
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 25px;
             animation: bounce 2s infinite;
             z-index: 2;
         }
 
         .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             fill: var(--dark-green);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-12px); }
-            60% { transform: translateY(-6px); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
         .section-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 0;
+            padding: 30px 0;
             position: relative;
         }
 
@@ -397,28 +362,29 @@
             flex: 1;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--gold), var(--sage), transparent);
-            max-width: 150px;
+            max-width: 100px;
         }
 
         .section-divider .ornament {
-            padding: 0 25px;
+            padding: 0 20px;
             color: var(--gold);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
         section {
-            padding: 90px 20px;
+            padding: 60px 16px;
             position: relative;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             color: var(--dark-green);
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             font-weight: 400;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            padding: 0 10px;
         }
 
         .location {
@@ -434,7 +400,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, var(--sage), var(--gold), var(--olive), var(--gold), var(--sage));
             background-size: 200% 100%;
             animation: shimmerLine 8s ease infinite;
@@ -445,62 +411,61 @@
             100% { background-position: 200% 50%; }
         }
 
-        .location-placeholder {
+        .location-info {
             background: linear-gradient(135deg, var(--light-sage) 0%, var(--sage) 100%);
-            border-radius: 15px;
-            padding: 60px 20px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
+            border-radius: 12px;
+            padding: 25px 16px;
+            margin: 16px 0;
             border: 2px solid rgba(201, 169, 97, 0.4);
-            box-shadow: 0 8px 25px rgba(45, 80, 67, 0.1);
         }
 
-        .location-placeholder::before {
-            content: "🌿";
-            position: absolute;
-            font-size: 8rem;
-            opacity: 0.1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            pointer-events: none;
-        }
-
-        .location-placeholder p {
-            font-size: 1.2rem;
+        .location-info p {
+            font-size: 1rem;
             color: var(--dark-green);
-            position: relative;
-            z-index: 1;
             font-weight: 500;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .location-map {
+            margin: 16px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(45, 80, 67, 0.1);
+        }
+
+        #yandex-map {
+            width: 100%;
+            height: 300px;
         }
 
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 30px;
         }
 
         .image-placeholder {
             aspect-ratio: 1;
             background: linear-gradient(135deg, var(--sage) 0%, var(--medium-green) 100%);
-            border-radius: 15px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: relative;
             overflow: hidden;
-            border: 3px solid var(--white);
-            box-shadow: 0 6px 20px rgba(45, 80, 67, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--white);
+            box-shadow: 0 4px 15px rgba(45, 80, 67, 0.1);
         }
 
-        .image-placeholder:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(45, 80, 67, 0.25);
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
         }
 
         .program {
@@ -512,30 +477,29 @@
 
         .program-placeholder {
             background: var(--white);
-            border-radius: 15px;
-            padding: 40px 20px;
-            margin: 20px 0;
-            position: relative;
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin: 16px 0;
             border: 2px solid rgba(201, 169, 97, 0.3);
-            box-shadow: 0 8px 25px rgba(45, 80, 67, 0.08);
+            box-shadow: 0 6px 20px rgba(45, 80, 67, 0.08);
         }
 
         .program-placeholder::before {
             content: "📋";
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--gold), var(--olive));
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            font-size: 1rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
 
         .dress-code {
@@ -545,46 +509,46 @@
         }
 
         .dress-code-container {
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
             background: var(--cream);
-            padding: 60px 40px;
+            padding: 40px 20px;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             border-radius: 5px;
             border: 1px solid rgba(201, 169, 97, 0.3);
         }
 
         .dc-decoration {
             position: absolute;
-            opacity: 0.12;
+            opacity: 0.1;
             pointer-events: none;
         }
 
         .dc-decoration-leaf-1 {
-            top: 20px;
-            right: 25px;
-            font-size: 3.5rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
             transform: rotate(15deg);
         }
 
         .dc-decoration-leaf-2 {
-            bottom: 30px;
-            left: 25px;
-            font-size: 3rem;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2rem;
             transform: rotate(-10deg);
         }
 
         .dc-main-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: var(--olive-dark);
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             font-weight: 400;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             position: relative;
-            padding-bottom: 20px;
+            padding-bottom: 15px;
         }
 
         .dc-main-title::after {
@@ -593,24 +557,24 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 60px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .dc-section {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
-            padding-left: 30px;
+            padding-left: 24px;
         }
 
         .dc-section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--brown);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             position: relative;
             display: inline-block;
@@ -619,26 +583,27 @@
         .dc-section-title::before {
             content: "🌿";
             position: absolute;
-            left: -28px;
+            left: -24px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.6;
         }
 
         .dc-section-text {
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
+            line-height: 1.7;
             color: var(--brown);
             font-weight: 300;
-            max-width: 500px;
+            max-width: 100%;
         }
 
         .dc-color-palette {
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .dc-color-item {
@@ -646,12 +611,12 @@
         }
 
         .dc-color-box {
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 3px solid white;
+            margin-bottom: 6px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            border: 2px solid white;
         }
 
         .dc-color-1 { background-color: var(--olive-dark); }
@@ -663,7 +628,7 @@
 
         .dc-elegant-divider {
             text-align: center;
-            margin: 40px 0;
+            margin: 30px 0;
             position: relative;
         }
 
@@ -679,13 +644,12 @@
 
         .dc-elegant-divider span {
             background: var(--cream);
-            padding: 0 15px;
+            padding: 0 12px;
             color: var(--gold);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             position: relative;
         }
 
-        /* Details Section - Упрощенный стиль без артефактов */
         .details {
             background: rgba(249, 247, 242, 0.5);
             backdrop-filter: blur(10px);
@@ -707,64 +671,49 @@
         .details-list {
             display: flex;
             flex-direction: column;
-            gap: 50px;
-            max-width: 750px;
+            gap: 30px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
         .detail-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 35px;
+            text-align: center;
+            gap: 16px;
             opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .detail-item:nth-child(1) { animation-delay: 0.1s; }
-        .detail-item:nth-child(2) { animation-delay: 0.3s; }
-        .detail-item:nth-child(3) { animation-delay: 0.5s; }
-
-        .detail-item:nth-child(odd) {
-            flex-direction: row;
-        }
-
-        .detail-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
+        .detail-item:nth-child(2) { animation-delay: 0.25s; }
+        .detail-item:nth-child(3) { animation-delay: 0.4s; }
 
         .detail-icon {
             flex-shrink: 0;
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 8px 25px rgba(45, 80, 67, 0.15);
-            border: 3px solid var(--gold-light);
+            font-size: 2rem;
+            box-shadow: 0 6px 18px rgba(45, 80, 67, 0.12);
+            border: 2px solid var(--gold-light);
             transition: transform 0.3s ease;
-        }
-
-        .detail-item:hover .detail-icon {
-            transform: scale(1.1) rotate(5deg);
         }
 
         .detail-content {
             flex: 1;
+            width: 100%;
             background: var(--white);
-            padding: 30px 35px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(45, 80, 67, 0.08);
+            padding: 24px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(45, 80, 67, 0.08);
             border: 1px solid rgba(201, 169, 97, 0.2);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .detail-item:hover .detail-content {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(45, 80, 67, 0.15);
         }
 
         .detail-content::before {
@@ -775,25 +724,25 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--sage), var(--gold), var(--olive));
-            border-radius: 15px 15px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .detail-content h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--dark-green);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .detail-content p {
             color: var(--text-dark);
-            line-height: 1.8;
-            font-size: 0.95rem;
+            line-height: 1.7;
+            font-size: 0.9rem;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -846,38 +795,38 @@
         }
 
         .rsvp-form {
-            max-width: 500px;
+            max-width: 100%;
             margin: 0 auto;
             background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
+            padding: 30px 20px;
+            border-radius: 16px;
             color: var(--text-dark);
             position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
             border: 2px solid var(--gold-light);
         }
 
         .rsvp-form::before {
             content: "💌";
             position: absolute;
-            top: -20px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--dark-green), var(--medium-green));
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gold-light);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             border: 3px solid var(--gold);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
@@ -886,7 +835,8 @@
             font-weight: 500;
             color: var(--dark-green);
             position: relative;
-            padding-left: 20px;
+            padding-left: 18px;
+            font-size: 0.95rem;
         }
 
         .form-group label::before {
@@ -894,20 +844,21 @@
             position: absolute;
             left: 0;
             color: var(--gold);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             line-height: 1;
         }
 
         .form-group input[type="text"],
         .form-group textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 14px;
             border: 2px solid var(--light-sage);
-            border-radius: 10px;
+            border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             transition: all 0.3s ease;
             background: rgba(249, 247, 242, 0.8);
+            min-height: 48px;
         }
 
         .form-group input[type="text"]:focus,
@@ -915,32 +866,33 @@
             outline: none;
             border-color: var(--medium-green);
             background: var(--white);
-            box-shadow: 0 0 0 4px rgba(156, 175, 136, 0.2);
+            box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.2);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 90px;
+            min-height: 80px;
         }
 
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .radio-option {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 20px;
+            gap: 10px;
+            padding: 14px 16px;
             border: 2px solid var(--light-sage);
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             background: rgba(249, 247, 242, 0.6);
             position: relative;
             overflow: hidden;
+            font-size: 0.95rem;
         }
 
         .radio-option::before {
@@ -948,7 +900,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 3px;
             height: 100%;
             background: var(--gold);
             transform: scaleY(0);
@@ -956,19 +908,18 @@
             transform-origin: top;
         }
 
-        .radio-option:hover {
+        .radio-option:active {
             border-color: var(--medium-green);
             background-color: rgba(197, 213, 184, 0.3);
-            transform: translateX(5px);
         }
 
-        .radio-option:hover::before {
+        .radio-option:active::before {
             transform: scaleY(1);
         }
 
         .radio-option input[type="radio"] {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             accent-color: var(--dark-green);
             cursor: pointer;
             position: relative;
@@ -977,41 +928,25 @@
 
         .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--dark-green) 0%, var(--medium-green) 100%);
             color: var(--white);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(45, 80, 67, 0.3);
-            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(45, 80, 67, 0.3);
+            letter-spacing: 0.3px;
+            min-height: 48px;
         }
 
-        .submit-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, var(--medium-green) 0%, var(--sage) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(45, 80, 67, 0.4);
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
+        .submit-btn:active {
+            transform: scale(0.98);
         }
 
         .submit-btn:disabled {
@@ -1022,17 +957,18 @@
         }
 
         .form-message {
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 12px;
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 10px;
             text-align: center;
             display: none;
             font-weight: 500;
+            font-size: 0.9rem;
             animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -1054,7 +990,7 @@
             background: linear-gradient(135deg, var(--dark-green) 0%, var(--medium-green) 100%);
             color: var(--white);
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 16px;
             position: relative;
             overflow: hidden;
         }
@@ -1065,134 +1001,246 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--gold), var(--olive), var(--gold), transparent);
         }
 
         footer p {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
             font-style: italic;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         footer .signature {
-            font-size: 1.3rem;
-            letter-spacing: 0.15em;
+            font-size: 1.1rem;
+            letter-spacing: 0.12em;
             position: relative;
             display: inline-block;
-            padding: 10px 30px;
+            padding: 8px 24px;
             background: rgba(201, 169, 97, 0.2);
-            border-radius: 30px;
+            border-radius: 24px;
             border: 1px solid rgba(201, 169, 97, 0.4);
         }
 
         footer .signature::before,
         footer .signature::after {
             content: "✦";
-            margin: 0 10px;
+            margin: 0 8px;
             color: var(--gold-light);
         }
 
-        @media (max-width: 768px) {
-            section {
-                padding: 60px 20px;
+        /* ===== УЛУЧШЕННАЯ МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
             }
 
-            .rsvp-form {
-                padding: 35px 25px;
+            .hero {
+                padding: 30px 12px;
+                min-height: auto;
+                padding-bottom: 80px;
             }
 
             .hero-content-wrapper {
-                padding: 30px 15px;
-            }
-
-            .botanical-top-left,
-            .botanical-top-right,
-            .botanical-bottom-left,
-            .botanical-bottom-right {
-                width: 160px;
-                height: 130px;
-            }
-
-            .botanical-middle-right,
-            .botanical-middle-left {
-                display: none;
-            }
-
-            .names-title::before,
-            .names-title::after {
-                display: none;
+                padding: 20px 12px;
             }
 
             .names-title {
-                font-size: clamp(4rem, 16vw, 7rem);
+                font-size: clamp(3rem, 14vw, 5.5rem);
+                margin-bottom: 20px;
             }
 
-            .dress-code-container {
-                padding: 40px 25px;
+            .invitation-text {
+                font-size: clamp(0.95rem, 4.5vw, 1.2rem);
+                margin-bottom: 28px;
             }
 
-            .dc-main-title {
-                font-size: 2.2rem;
+            .date-block {
+                padding: 20px 16px;
+                margin: 28px 0;
             }
 
-            .dc-section-title {
-                font-size: 1.2rem;
+            .date-main {
+                font-size: clamp(1.4rem, 7vw, 2rem);
             }
 
-            .dc-color-box {
-                width: 50px;
-                height: 50px;
+            .time {
+                font-size: clamp(1rem, 4.5vw, 1.3rem);
             }
 
-            .shimmer-orb-1,
-            .shimmer-orb-4 {
-                width: 300px;
-                height: 300px;
+            .location-block {
+                font-size: clamp(0.9rem, 4vw, 1.1rem);
+                padding: 16px 12px;
             }
 
-            .shimmer-orb-2,
-            .shimmer-orb-3 {
-                width: 250px;
+            section {
+                padding: 45px 12px;
+            }
+
+            .section-title {
+                font-size: clamp(1.6rem, 7vw, 2.2rem);
+                margin-bottom: 32px;
+                letter-spacing: 1.5px;
+            }
+
+            .location-info {
+                padding: 20px 12px;
+            }
+
+            .location-info p {
+                font-size: 0.95rem;
+            }
+
+            #yandex-map {
                 height: 250px;
             }
 
-            .detail-item {
-                flex-direction: column !important;
-                text-align: center;
-                gap: 20px;
+            .image-grid {
+                gap: 12px;
+                margin-top: 24px;
+            }
+
+            .dress-code-container {
+                padding: 32px 16px;
+            }
+
+            .dc-main-title {
+                font-size: 1.9rem;
+                margin-bottom: 32px;
+            }
+
+            .dc-section {
+                padding-left: 20px;
+            }
+
+            .dc-section-title {
+                font-size: 1.1rem;
+            }
+
+            .dc-color-palette {
+                gap: 10px;
+            }
+
+            .dc-color-box {
+                width: 42px;
+                height: 42px;
+            }
+
+            .details-list {
+                gap: 24px;
             }
 
             .detail-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
+                width: 64px;
+                height: 64px;
+                font-size: 1.8rem;
+            }
+
+            .detail-content {
+                padding: 20px 16px;
+            }
+
+            .detail-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .detail-content p {
+                font-size: 0.88rem;
+            }
+
+            .rsvp-form {
+                padding: 24px 16px;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                padding-left: 16px;
+            }
+
+            .form-group input[type="text"],
+            .form-group textarea {
+                padding: 11px 12px;
+                font-size: 0.95rem;
+                min-height: 44px;
+            }
+
+            .radio-option {
+                padding: 12px 14px;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 13px;
+                font-size: 1rem;
+                min-height: 44px;
+            }
+
+            footer {
+                padding: 45px 12px;
+            }
+
+            footer p {
+                font-size: clamp(1.2rem, 6vw, 1.6rem);
+            }
+
+            footer .signature {
+                font-size: 1rem;
+                padding: 6px 20px;
+            }
+
+            /* Скрываем тяжелые анимации на мобильных для производительности */
+            .shimmer-orb,
+            .particle,
+            .floating-leaf {
+                display: none;
+            }
+
+            .animated-bg {
+                animation: none;
+                background: linear-gradient(135deg, #f9f7f2, #e8f0e4);
+            }
+
+            /* Отключаем сложные анимации */
+            .detail-item {
+                animation: none;
+                opacity: 1;
             }
         }
 
-        @media (prefers-reduced-motion: no-preference) {
-            .image-placeholder,
-            .dc-color-item {
-                animation: fadeInUp 0.6s ease forwards;
-                opacity: 0;
+        /* Отключаем анимации при включенном режиме энергосбережения */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
 
-            .image-placeholder:nth-child(1) { animation-delay: 0.1s; }
-            .image-placeholder:nth-child(2) { animation-delay: 0.2s; }
+            .animated-bg,
+            .shimmer-orb,
+            .particle,
+            .floating-leaf {
+                display: none;
+            }
+        }
 
-            .dc-color-item:nth-child(1) { animation-delay: 0.1s; }
-            .dc-color-item:nth-child(2) { animation-delay: 0.15s; }
-            .dc-color-item:nth-child(3) { animation-delay: 0.2s; }
-            .dc-color-item:nth-child(4) { animation-delay: 0.25s; }
-            .dc-color-item:nth-child(5) { animation-delay: 0.3s; }
-            .dc-color-item:nth-child(6) { animation-delay: 0.35s; }
+        /* Улучшения для тач-устройств */
+        @media (hover: none) and (pointer: coarse) {
+            .image-placeholder,
+            .detail-icon,
+            .detail-content,
+            .radio-option,
+            .submit-btn {
+                transition: none;
+            }
 
-            @keyframes fadeInUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
+            .radio-option:active,
+            .submit-btn:active {
+                opacity: 0.95;
             }
         }
     </style>
@@ -1255,26 +1303,6 @@
             </svg>
         </div>
 
-        <div class="botanical-decoration botanical-middle-right">
-            <svg class="leaf-svg" viewBox="0 0 270 220">
-                <path d="M135,210 Q115,185 95,165 Q75,145 65,125 Q55,105 58,85 Q62,65 72,58"/>
-                <path d="M95,165 Q85,150 75,132 Q65,114 62,100"/>
-                <path d="M135,165 Q145,150 155,132 Q165,114 170,98"/>
-                <path d="M135,165 Q147,170 160,180 Q173,190 183,205"/>
-                <path d="M95,165 Q105,170 115,180 Q125,190 132,202"/>
-                <path d="M155,132 Q165,122 175,108 Q182,100 185,95"/>
-            </svg>
-        </div>
-
-        <div class="botanical-decoration botanical-middle-left">
-            <svg class="leaf-svg" viewBox="0 0 240 200">
-                <path d="M120,190 Q100,165 80,145 Q60,125 50,105 Q40,85 43,65 Q47,50 57,43"/>
-                <path d="M80,145 Q70,130 60,112 Q50,94 47,80"/>
-                <path d="M120,145 Q130,130 140,112 Q150,94 155,78"/>
-                <path d="M120,145 Q132,150 145,160 Q158,170 168,185"/>
-            </svg>
-        </div>
-
         <div class="botanical-decoration botanical-bottom-right">
             <svg class="leaf-svg" viewBox="0 0 280 220">
                 <path d="M140,210 Q120,185 100,165 Q80,145 70,125 Q60,105 63,85 Q67,65 77,58"/>
@@ -1291,9 +1319,7 @@
             <h1 class="names-title">Антон <span class="and">и</span> Вероника</h1>
 
             <p class="invitation-text">
-                Мы собираемся сказать друг другу<br>
-                самые важные слова в окружении<br>
-                близких и дорогих нам людей
+                Мы собираемся сказать друг другу самые важные слова в окружении близких и дорогих нам людей
             </p>
 
             <div class="date-block">
@@ -1321,47 +1347,20 @@
     <section class="location">
         <div class="container">
             <h2 class="section-title">МЕСТО ТОРЖЕСТВА</h2>
-            <div class="location-info" style="background: linear-gradient(135deg, var(--light-sage) 0%, var(--sage) 100%); border-radius: 15px; padding: 30px 20px; margin: 20px 0; border: 2px solid rgba(201, 169, 97, 0.4);">
-                <p style="font-size: 1.2rem; color: var(--dark-green); font-weight: 500; margin-bottom: 20px;">
-                    📍 Московская область, городской округ Щёлково,<br>
-                    территория усадьбы Гребнево, Банкетный зал «Барский»
-                </p>
+            <div class="location-info">
+                <p>📍 Московская область, городской округ Щёлково,<br>
+                территория усадьбы Гребнево, Банкетный зал «Барский»</p>
 
-                <div class="location-map" style="margin: 20px 0; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(45, 80, 67, 0.1);">
-                    <div id="yandex-map" style="width: 100%; height: 450px;"></div>
+                <div class="location-map">
+                    <div id="yandex-map"></div>
                 </div>
-
-                <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-                <script>
-                    ymaps.ready(initMap);
-                    function initMap() {
-                        var myMap = new ymaps.Map("yandex-map", {
-                            center: [55.946948, 38.088682], // Координаты: [широта, долгота]
-                            zoom: 17,
-                            controls: ['zoomControl']
-                        });
-
-                        // Создаем метку с кастомной иконкой
-                        var myPlacemark = new ymaps.Placemark([55.946948, 38.088682], {
-                            hintContent: 'Банкетный зал «Барский»',
-                            balloonContent: 'Банкетный зал «Барский»<br>Усадьба Гребнево'
-                        }, {
-                            preset: 'islands#redRestaurantIcon' // Красная метка ресторана
-                        });
-
-                        myMap.geoObjects.add(myPlacemark);
-
-                        // Отключаем скролл карты колесиком (чтобы не мешал прокрутке сайта)
-                        myMap.behaviors.disable('scrollZoom');
-                    }
-                </script>
             </div>
             <div class="image-grid">
                 <div class="image-placeholder">
-                    <img src="images/photo1.png" alt="Место проведения" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                    <img src="images/photo1.png" alt="Место проведения" loading="lazy">
                 </div>
                 <div class="image-placeholder">
-                    <img src="images/photo2.png" alt="Место проведения" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                    <img src="images/photo2.png" alt="Место проведения" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1386,7 +1385,6 @@
 
     <section class="dress-code">
         <div class="container">
-            <h2 class="section-title" style="display: none;">ДРЕСС-КОД</h2>
             <div class="dress-code-container">
                 <div class="dc-decoration dc-decoration-leaf-1">🌿</div>
                 <div class="dc-decoration dc-decoration-leaf-2">🍃</div>
@@ -1394,11 +1392,11 @@
                 <h1 class="dc-main-title">ДРЕСС-КОД</h1>
 
                 <div class="dc-section">
-                    <p class="dc-section-text" style="padding-left: 0; margin-bottom: 25px;">
+                    <p class="dc-section-text">
                         Мы очень ждем и с удовольствием готовимся к нашему незабываемому дню!<br><br>
                         Поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в представленной палитре.
                     </p>
-                    <p class="dc-section-text" style="padding-left: 0; margin-bottom: 25px;">
+                    <p class="dc-section-text" style="margin-top: 16px;">
                         Мы понимаем, что белый цвет очень красивый, но в этот день, белый — цвет невесты.
                     </p>
                     <div class="dc-color-palette">
@@ -1427,10 +1425,9 @@
                     <span>✦</span>
                 </div>
 
-                <div style="text-align: center; margin-top: 50px; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--brown); line-height: 1.8;">
-                    По всем вопросам можете обращаться<br>
-                    к нашему организатору свадьбы<br>
-                    <strong style="color: var(--olive-dark);">+7 909 151-90-01 Анна</strong>
+                <div style="text-align: center; margin-top: 40px; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--brown); line-height: 1.7;">
+                    По всем вопросам можете обращаться к нашему организатору свадьбы:<br>
+                    <strong style="color: var(--olive-dark); display: block; margin-top: 8px; font-size: 1rem;">+7 909 151-90-01 Анна</strong>
                 </div>
             </div>
         </div>
@@ -1578,6 +1575,40 @@
             }
         });
 
+        // Инициализация карты только когда она видна
+        let mapInitialized = false;
+        const mapObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !mapInitialized && typeof ymaps !== 'undefined') {
+                initMap();
+                mapInitialized = true;
+                mapObserver.disconnect();
+            }
+        }, { threshold: 0.1 });
+
+        const mapElement = document.getElementById('yandex-map');
+        if (mapElement) {
+            mapObserver.observe(mapElement);
+        }
+
+        function initMap() {
+            var myMap = new ymaps.Map("yandex-map", {
+                center: [55.946948, 38.088682],
+                zoom: 17,
+                controls: ['zoomControl']
+            });
+
+            var myPlacemark = new ymaps.Placemark([55.946948, 38.088682], {
+                hintContent: 'Банкетный зал «Барский»',
+                balloonContent: 'Банкетный зал «Барский»<br>Усадьба Гребнево'
+            }, {
+                preset: 'islands#redRestaurantIcon'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+            myMap.behaviors.disable('scrollZoom');
+        }
+
+        // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1588,5 +1619,6 @@
             });
         });
     </script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 </body>
 </html>
