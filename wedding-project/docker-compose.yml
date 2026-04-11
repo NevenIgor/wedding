@@ -10,7 +10,7 @@ services:
     environment:
       - DB_PATH=/data/wedding.db
       - TG_BOT_TOKEN=${TG_BOT_TOKEN}
-      - TG_CHAT_ID=${TG_CHAT_ID}
+      - TG_USER_IDS=${TG_USER_IDS}
       - API_SECRET=${API_SECRET:-wedding_secret_2026}
     volumes:
       - backend_data:/data
