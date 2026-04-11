@@ -1,8 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 import sqlite3
 import os
 import requests
+import hmac
+import hashlib
+import json
 from datetime import datetime
 
 app = Flask(__name__)
@@ -12,11 +15,34 @@ CORS(app)
 DB_PATH = os.environ.get('DB_PATH', '/data/wedding.db')
 TG_BOT_TOKEN = os.environ.get('TG_BOT_TOKEN', '')
 TG_USER_IDS = os.environ.get('TG_USER_IDS', '').split(',') if os.environ.get('TG_USER_IDS') else []
+API_SECRET = os.environ.get('API_SECRET', 'secret')
+WEBHOOK_SECRET = os.environ.get('WEBHOOK_SECRET', 'webhook_secret_key')
+
+def verify_signature(payload, signature):
+    """Проверка подписи запроса от бота"""
+    if not signature:
+        return False
+    
+    expected_signature = hmac.new(
+        WEBHOOK_SECRET.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+    
+    return hmac.compare_digest(expected_signature, signature)
 
 def init_db():
     """Инициализация базы данных"""
-    conn = sqlite3.connect(DB_PATH)
+    # Создаем директорию если не существует
+    db_dir = os.path.dirname(DB_PATH)
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir)
+    
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     cursor = conn.cursor()
+    
+    # Включаем WAL режим для лучшей производительности
+    cursor.execute('PRAGMA journal_mode=WAL')
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS guests (
@@ -33,7 +59,7 @@ def init_db():
 
 def get_db_connection():
     """Получение соединения с БД"""
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -80,6 +106,13 @@ def send_telegram_notification(guest_data):
 @app.route('/api/rsvp', methods=['POST'])
 def submit_rsvp():
     """Обработка подтверждения присутствия"""
+    # Проверка подписи для безопасности
+    signature = request.headers.get('X-Signature')
+    payload = request.get_data()
+    
+    if not verify_signature(payload, signature):
+        abort(403, description="Invalid signature")
+    
     data = request.json
     
     if not data or 'name' not in data or 'attending' not in data:
@@ -129,7 +162,7 @@ def submit_rsvp():
 def get_guests():
     """Получение списка гостей (для бота)"""
     auth_header = request.headers.get('Authorization')
-    if auth_header != f"Bearer {os.environ.get('API_SECRET', 'secret')}":
+    if auth_header != f"Bearer {API_SECRET}":
         return jsonify({'error': 'Unauthorized'}), 401
     
     conn = get_db_connection()
@@ -155,7 +188,7 @@ def get_guests():
 def get_stats():
     """Получение статистики (для бота)"""
     auth_header = request.headers.get('Authorization')
-    if auth_header != f"Bearer {os.environ.get('API_SECRET', 'secret')}":
+    if auth_header != f"Bearer {API_SECRET}":
         return jsonify({'error': 'Unauthorized'}), 401
     
     conn = get_db_connection()
