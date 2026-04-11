@@ -43,13 +43,15 @@ def send_telegram_notification(guest_data):
         print("Telegram не настроен")
         return
     
+    # Преобразуем yes/no в русские Да/Нет со смайлами
+    attending_status = "✅ Да" if guest_data['attending'] == 'yes' else "❌ Нет"
+    
     message = f"""
 🎉 <b>Новый ответ на приглашение!</b>
 
 👤 <b>Имя:</b> {guest_data['name']}
-✅ <b>Присутствие:</b> {guest_data['attending']}
+✅ <b>Присутствие:</b> {attending_status}
 🍷 <b>Напитки:</b> {guest_data.get('drinks_preference', 'Не указано')}
-⏰ <b>Время:</b> {datetime.now().strftime('%d.%m.%Y %H:%M')}
     """
     
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"

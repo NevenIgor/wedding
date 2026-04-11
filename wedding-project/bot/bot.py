@@ -10,6 +10,15 @@ API_SECRET = os.environ.get('API_SECRET', 'secret')
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
+# Создание основной клавиатуры
+def create_main_keyboard():
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    btn_stats = types.KeyboardButton('📊 Статистика')
+    btn_list = types.KeyboardButton('📋 Список гостей')
+    btn_help = types.KeyboardButton('📖 Помощь')
+    keyboard.add(btn_stats, btn_list, btn_help)
+    return keyboard
+
 # Команда /start
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -23,7 +32,7 @@ def send_welcome(message):
 
 С любовью, Антон и Вероника 💚
     """
-    bot.send_message(message.chat.id, welcome_text, parse_mode='HTML')
+    bot.send_message(message.chat.id, welcome_text, parse_mode='HTML', reply_markup=create_main_keyboard())
 
 # Команда /help
 @bot.message_handler(commands=['help'])
@@ -43,7 +52,7 @@ def send_help(message):
 
 /start - Главное меню
     """
-    bot.send_message(message.chat.id, help_text, parse_mode='HTML')
+    bot.send_message(message.chat.id, help_text, parse_mode='HTML', reply_markup=create_main_keyboard())
 
 # Команда /stats
 @bot.message_handler(commands=['stats'])
@@ -111,11 +120,19 @@ def send_guest_list(message):
 # Обработка текстовых сообщений
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    bot.send_message(
-        message.chat.id, 
-        'Используйте команды:\n/stats - статистика\n/list - список гостей\n/help - помощь',
-        parse_mode='HTML'
-    )
+    if message.text == '📊 Статистика':
+        send_stats(message)
+    elif message.text == '📋 Список гостей':
+        send_guest_list(message)
+    elif message.text == '📖 Помощь':
+        send_help(message)
+    else:
+        bot.send_message(
+            message.chat.id, 
+            'Используйте команды:\n/stats - статистика\n/list - список гостей\n/help - помощь',
+            parse_mode='HTML',
+            reply_markup=create_main_keyboard()
+        )
 
 if __name__ == '__main__':
     print("Бот запущен...")
