@@ -43,13 +43,14 @@ def send_telegram_notification(guest_data):
         print("Telegram не настроен")
         return
     
-    attending_text = "✅ Да" if guest_data['attending'] == 'yes' else "❌ Нет"
+    # Преобразуем yes/no в русские Да/Нет со смайлами
+    attending_status = "✅ Да" if guest_data['attending'] == 'yes' else "❌ Нет"
     
     message = f"""
 🎉 <b>Новый ответ на приглашение!</b>
 
 👤 <b>Имя:</b> {guest_data['name']}
-✅ <b>Присутствие:</b> {attending_text}
+✅ <b>Присутствие:</b> {attending_status}
 🍷 <b>Напитки:</b> {guest_data.get('drinks_preference', 'Не указано')}
     """
     
