@@ -36,13 +36,12 @@ services:
       - wedding-network
     restart: unless-stopped
 
-  # Frontend (Nginx)
   frontend:
     image: nginx:alpine
     container_name: wedding-frontend
     volumes:
       - ./frontend:/usr/share/nginx/html:ro
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - "80:80"
     networks:
