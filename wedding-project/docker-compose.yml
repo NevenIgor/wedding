@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-  # Backend API
   backend:
     build:
       context: ./backend
@@ -19,6 +16,12 @@ services:
     networks:
       - wedding-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   # Telegram Bot
   bot:
@@ -47,6 +50,8 @@ services:
     networks:
       - wedding-network
     restart: unless-stopped
+    depends_on:
+      - backend
 
 networks:
   wedding-network:
