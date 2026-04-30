@@ -107,11 +107,11 @@ def send_telegram_notification(guest_data):
 def submit_rsvp():
     """Обработка подтверждения присутствия"""
     # Проверка подписи для безопасности
-    signature = request.headers.get('X-Signature')
-    payload = request.get_data()
+    #signature = request.headers.get('X-Signature')
+    #payload = request.get_data()
     
-    if not verify_signature(payload, signature):
-        abort(403, description="Invalid signature")
+    #if not verify_signature(payload, signature):
+    #    abort(403, description="Invalid signature")
     
     data = request.json
     
