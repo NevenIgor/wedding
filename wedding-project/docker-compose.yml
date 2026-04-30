@@ -44,9 +44,7 @@ services:
     volumes:
       - ./frontend:/usr/share/nginx/html:ro
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # 🔹 Сертификаты с хоста (только чтение)
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      # 🔹 ACME-челлендж для будущих обновлений
       - ./nginx/certbot/www:/var/www/certbot:ro
     ports:
       - "80:80"
