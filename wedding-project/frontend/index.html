@@ -544,6 +544,48 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
+        .program-list {
+            list-style: none;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 10px 0 0 0;
+        }
+
+        .program-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 10px;
+            border-bottom: 1px dashed rgba(201, 169, 97, 0.3);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .program-list li:last-child {
+            border-bottom: none;
+        }
+
+        .program-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--olive-dark);
+            font-weight: 600;
+            letter-spacing: 1px;
+            min-width: 70px;
+            text-align: left;
+        }
+
+        .program-event {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--brown);
+            font-style: italic;
+            text-align: right;
+            flex: 1;
+        }
+
         .dress-code {
             background: rgba(255,255,255,0.4);
             backdrop-filter: blur(10px);
@@ -848,6 +890,22 @@
 
         .rsvp .section-title {
             color: var(--white);
+        }
+
+        .rsvp-note {
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--cream);
+            padding: 20px 25px;
+            border-left: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            line-height: 1.5;
         }
 
         .rsvp-form {
@@ -1178,6 +1236,20 @@
                 margin-top: 30px;
             }
 
+            .program-list li {
+                padding: 14px 8px;
+                gap: 12px;
+                font-size: 1.1rem;
+            }
+
+            .program-time {
+                font-size: 1.25rem;
+            }
+
+            .program-event {
+                font-size: 1.1rem;
+            }
+
             .dress-code-container {
                 padding: 40px 24px;
             }
@@ -1218,6 +1290,12 @@
 
             .detail-content {
                 padding: 24px 20px;
+            }
+
+            .rsvp-note {
+                font-size: 1.15rem;
+                padding: 18px 20px;
+                margin-bottom: 25px;
             }
 
             .rsvp-form {
@@ -1470,7 +1548,20 @@
         <div class="container">
             <h2 class="section-title">ПРОГРАММА ТОРЖЕСТВА</h2>
             <div class="program-placeholder">
-                <p>Программа будет опубликована в ближайшее время</p>
+                <ul class="program-list">
+                    <li>
+                        <span class="program-time">15:00</span>
+                        <span class="program-event">Сбор гостей</span>
+                    </li>
+                    <li>
+                        <span class="program-time">16:00</span>
+                        <span class="program-event">Выездная церемония</span>
+                    </li>
+                    <li>
+                        <span class="program-time">17:00</span>
+                        <span class="program-event">Банкет</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
@@ -1519,11 +1610,6 @@
 
                 <div class="dc-elegant-divider">
                     <span>✦</span>
-                </div>
-
-                <div style="text-align: center; margin-top: 50px; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--brown); line-height: 1.8;">
-                    По всем вопросам можете обращаться к нашему организатору свадьбы:<br>
-                    <strong style="color: var(--olive-dark); display: block; margin-top: 8px;">+7 909 151-90-01 Анна</strong>
                 </div>
             </div>
         </div>
@@ -1577,10 +1663,11 @@
         <div class="rsvp-particle"></div>
         <div class="container">
             <h2 class="section-title">ПОДТВЕРДИТЕ ПРИСУТСТВИЕ</h2>
+            <p class="rsvp-note">Пожалуйста, подтвердите свое присутствие до 1 августа</p>
             <form class="rsvp-form" id="rsvpForm">
                 <div class="form-group">
-                    <label for="name">Имя и фамилия</label>
-                    <input type="text" id="name" name="name" placeholder="Если вы будете парой, внесите все имена" required>
+                    <label for="name">Внесите имена присутствующих</label>
+                    <input type="text" id="name" name="name" placeholder="Внесите все имена" required>
                 </div>
 
                 <div class="form-group">
@@ -1606,6 +1693,10 @@
 
                 <div class="form-message" id="formMessage"></div>
             </form>
+        </div>
+        <div style="text-align: center; margin-top: 50px; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--brown); line-height: 1.8;">
+            По всем вопросам можете обращаться к нашему организатору свадьбы:<br>
+            <strong style="color: var(--olive-dark); display: block; margin-top: 8px;">+7 909 151-90-01 Анна</strong>
         </div>
     </section>
 
